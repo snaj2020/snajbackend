@@ -31,7 +31,7 @@ SECRET_KEY = 'f9d02*6b+83_t5s858(gf1&oe&r0a0(n416ztv4m*7z8gz7a*&'
 DEBUG = False
 #DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 #ROLES DE ADMINISTRADOR Y AUXILIAR
 ADMIN_USER = 'Admin'
