@@ -1,1 +1,1 @@
-web: gunicorn locallibrary.wsgi --log-file -
+web: gunicorn SNAJ_Cirugias.wsgi -b 0.0.0.0:$PORT
