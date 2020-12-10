@@ -6,3 +6,4 @@ django-allauth==0.43.0
 psycopg2==2.8.6
 reportlab==3.5.55
 whitenoise==5.2.0
+gunicorn
