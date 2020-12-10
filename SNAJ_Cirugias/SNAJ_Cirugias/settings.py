@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 
 #ROLES DE ADMINISTRADOR Y AUXILIAR
 ADMIN_USER = 'Admin'
-AUXILIAR_USER = 'Auxiliar Programación'
+AUXILIAR_USER = 'Auxiliar de Programación'
 
 
 # Application definition
