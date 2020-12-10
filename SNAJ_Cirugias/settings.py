@@ -119,10 +119,10 @@ WSGI_APPLICATION = 'SNAJ_Cirugias.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'SNAJ_PROCEDIMIENTOS',
-        'USER':'postgres',
-        'PASSWORD':'postgres',
-        'HOST':'localhost',
+        'NAME':'d92du4mpek5go9',
+        'USER':'mfiiunhsoutvzz',
+        'PASSWORD':'b5c216b7a03ccd8d8e7f515dab14d600ed3b702719324b3eb97e45c081127be0',
+        'HOST':'ec2-54-159-107-189.compute-1.amazonaws.com',
         'PORT':'5432',
     }
 }
