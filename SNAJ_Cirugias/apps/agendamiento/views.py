@@ -669,12 +669,12 @@ def generateRecibido(request, idAgendaProc):
         logotipo = "Documents/Images/logo.png"
 
         formatoFecha = datetime.now()
-        fechaActual = formatoFecha.strftime("%A, %B %d de %Y")
+        #fechaActual = formatoFecha.strftime("%A, %B %d de %Y")
         
         estilos = getSampleStyleSheet()
         estilos.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-        texto = '%s' % fechaActual
-        Story.append(Paragraph(texto, estilos["Justify"]))
+        #texto = '%s' % fechaActual
+        #Story.append(Paragraph(texto, estilos["Justify"]))
         Story.append(Spacer(1, 20))
         imagen = Image(logotipo, 1 * inch, 1 * inch)
         Story.append(imagen)
@@ -686,7 +686,7 @@ def generateRecibido(request, idAgendaProc):
         agenProc = AgendaProcedimiento.objects.get(pk=idAgendaProc)
         nombreAuxiliar=request.user.first_name + " " + request.user.last_name
         nombrePaciente = Persona.objects.get(pk=agenProc.idPaciente.idPersona).nombre
-        fechaHoraProc = agenProc.fechaHora.strftime("%d de %B del %Y")
+        fechaHoraProc = agenProc.fechaHora.strftime("%d/%m/%Y")
 
         #Consulta para el nombre del procedimiento
         idProcMod = agenProc.idProcedimientoModalidad.idProcedimientoModalidad
@@ -695,7 +695,7 @@ def generateRecibido(request, idAgendaProc):
         nombreProc = Procedimiento.objects.get(codigoProcedimiento=codProc).nombre
 
         Story.append(Spacer(1, 12))
-        texto = 'Se confirma que el día %s el señor(a) %s a las %s, recibe la siguiente documentación:' % (formatoFecha.strftime("%d de %B del %Y"),
+        texto = 'Se confirma que el día %s el señor(a) %s a las %s, recibe la siguiente documentación:' % (formatoFecha.strftime("%d/%m/%Y"),
                                                                 nombreAuxiliar,
                                                                 formatoFecha.strftime("%I:%M %p")
                                                                 )
