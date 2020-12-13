@@ -37,7 +37,7 @@ from datetime import date, datetime,timedelta
 #3rd library
 #import PyPDF2 
 import locale
-#locale.setlocale(locale.LC_TIME, 'es-US') 
+locale.setlocale(locale.LC_TIME, 'es_US') 
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
