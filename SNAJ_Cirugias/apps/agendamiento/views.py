@@ -684,7 +684,7 @@ def generateRecibido(request, idAgendaProc):
 
         #Se obtienen las variables necesarias
         agenProc = AgendaProcedimiento.objects.get(pk=idAgendaProc)
-        nombreAuxiliar=agenProc.idUsuario.first_name + " " + agenProc.idUsuario.last_name 
+        nombreAuxiliar=request.user.first_name + " " + request.user.last_name
         nombrePaciente = Persona.objects.get(pk=agenProc.idPaciente.idPersona).nombre
         fechaHoraProc = agenProc.fechaHora.strftime("%d de %B del %Y")
 
