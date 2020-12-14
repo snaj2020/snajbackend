@@ -197,10 +197,10 @@ def getArchivoAdjunto(request, idDocAdj):
     try:
         docAdj = DocumentoAdjunto.objects.get(pk=idDocAdj)
         adjuntoFileName = docAdj.path
-        if not adjuntoFileName:
+        if adjuntoFileName != "":
             return FileResponse(open(adjuntoFileName,'rb'))
         else:
-            return JsonResponse({'error':'El documento adjunto no tiene path'},safe=False,status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'error':str(docAdj.path)},safe=False,status=status.HTTP_400_BAD_REQUEST)
     except Exception:
         return JsonResponse({'error':'No existe documento adjunto con id'},safe=False,status=status.HTTP_400_BAD_REQUEST)
 
