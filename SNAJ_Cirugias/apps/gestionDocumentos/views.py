@@ -194,17 +194,16 @@ def getListDocAdjunto(idAgenProc):
 @csrf_exempt
 @user_passes_test(lambda u: u.groups.filter(name=settings.AUXILIAR_USER).count() > 0)
 def getArchivoAdjunto(request, idDocAdj):
-    adjuntoFileName=""
     try:
         docAdj = DocumentoAdjunto.objects.get(pk=idDocAdj)
         adjuntoFileName = docAdj.path.name
-    except DocumentoAdjunto.DoesNotExist:
-        return JsonResponse({'error':'No existe documento adjunto con id'},safe=False,status=status.HTTP_400_BAD_REQUEST)
-    if adjuntoFileName != "":
-        return FileResponse(open(adjuntoFileName,'rb'))
-    else:
-        return JsonResponse({'error':'El documento adjunto no tiene path'},safe=False,status=status.HTTP_400_BAD_REQUEST)
-    
+        if adjuntoFileName != "":
+            return FileResponse(open(adjuntoFileName,'rb'))
+        else:
+            return JsonResponse({'error':'El documento adjunto no tiene path'},safe=False,status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return JsonResponse({'error':str(e)},safe=False,status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(["GET"])
 @csrf_exempt
