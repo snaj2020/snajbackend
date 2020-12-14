@@ -12,6 +12,7 @@ urlpatterns =[
                 path('deleteDocumentoAdjunto/<int:idDocAdj>',views.deleteDocumentoAdjunto),
                 path('getEstadosDocAjunto',views.getEstadosDocAjunto),
                 path('listDocAdjunto/<int:idAgenProc>',views.listDocAdjunto),
+                path('getArchivoAdjunto/<int:idDocAdj>',views.getArchivoAdjunto),
                 path('getAllDocumentos',views.getAllDocumentos)
                 
                 #path(r'^api/', include(router.urls)),

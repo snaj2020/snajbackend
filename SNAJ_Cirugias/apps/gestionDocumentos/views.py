@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
@@ -12,6 +12,7 @@ from SNAJ_Cirugias.apps.agendamiento.serializers import *
 from SNAJ_Cirugias.apps.gestionProcedimientos.models import *
 from SNAJ_Cirugias.apps.gestionProcedimientos.serializers import *
 from SNAJ_Cirugias.apps.utilidades import Choices
+from django.http import JsonResponse, HttpResponse, HttpResponseNotFound, FileResponse
 
 from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
@@ -189,6 +190,20 @@ def getListDocAdjunto(idAgenProc):
     except DocumentoAdjunto.DoesNotExist:
         return (False,result)
 
+@api_view(["GET"])
+@csrf_exempt
+@user_passes_test(lambda u: u.groups.filter(name=settings.AUXILIAR_USER).count() > 0)
+def getArchivoAdjunto(request, idDocAdj):
+    try:
+        docAdj = DocumentoAdjunto.objects.get(pk=idDocAdj)
+        adjuntoFileName = docAdj.path
+        if not adjuntoFileName:
+            return FileResponse(open(adjuntoFileName,'rb'))
+        else:
+            return JsonResponse({'error':'El documento adjunto no tiene path'},safe=False,status=status.HTTP_400_BAD_REQUEST)
+    except Exception:
+        return JsonResponse({'error':'No existe documento adjunto con id'},safe=False,status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(["GET"])
 @csrf_exempt
@@ -200,3 +215,4 @@ def getAllDocumentos(request):
         return JsonResponse(documento_serializer.data,safe=False, status=status.HTTP_200_OK)
     except Exception as e:
         return JsonResponse({'error':str(e)},safe=False,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
